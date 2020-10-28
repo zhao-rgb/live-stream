@@ -1,5 +1,6 @@
 <template>
 	<view>
+
 		<!-- 轮播图 -->
 		<swiper
 			:indicator-dots="true"
