@@ -288,7 +288,119 @@ var render = function() {
                   mode: "aspectFill",
                   _i: "8-" + $30
                 }
-              })
+              }),
+              _c(
+                "v-uni-view",
+                {
+                  staticClass: _vm._$g("9-" + $30, "sc"),
+                  staticStyle: {
+                    position: "absolute",
+                    left: "15rpx",
+                    top: "15rpx",
+                    "background-color": "rgba(0,0,0,0.4)"
+                  },
+                  attrs: { _i: "9-" + $30 }
+                },
+                [
+                  _c("v-uni-text", {
+                    staticClass: _vm._$g("10-" + $30, "sc"),
+                    attrs: { _i: "10-" + $30 }
+                  }),
+                  _c(
+                    "v-uni-text",
+                    {
+                      staticClass: _vm._$g("11-" + $30, "sc"),
+                      attrs: { _i: "11-" + $30 }
+                    },
+                    [_vm._v("0")]
+                  )
+                ],
+                1
+              ),
+              _c(
+                "v-uni-view",
+                {
+                  staticClass: _vm._$g("12-" + $30, "sc"),
+                  staticStyle: {
+                    position: "absolute",
+                    right: "15rpx",
+                    top: "15rpx",
+                    "background-color": "rgba(0,0,0,0.4)"
+                  },
+                  attrs: { _i: "12-" + $30 }
+                },
+                [
+                  _c(
+                    "v-uni-text",
+                    {
+                      staticClass: _vm._$g("13-" + $30, "sc"),
+                      attrs: { _i: "13-" + $30 }
+                    },
+                    [_vm._v("人气：")]
+                  ),
+                  _c(
+                    "v-uni-text",
+                    {
+                      staticClass: _vm._$g("14-" + $30, "sc"),
+                      attrs: { _i: "14-" + $30 }
+                    },
+                    [_vm._v("0")]
+                  )
+                ],
+                1
+              ),
+              _c(
+                "v-uni-view",
+                {
+                  staticClass: _vm._$g("15-" + $30, "sc"),
+                  staticStyle: {
+                    position: "absolute",
+                    left: "15rpx",
+                    bottom: "15rpx"
+                  },
+                  attrs: { _i: "15-" + $30 }
+                },
+                [
+                  _c(
+                    "v-uni-text",
+                    {
+                      staticClass: _vm._$g("16-" + $30, "sc"),
+                      attrs: { _i: "16-" + $30 }
+                    },
+                    [_vm._v("标题：")]
+                  )
+                ],
+                1
+              ),
+              _c(
+                "v-uni-view",
+                {
+                  staticClass: _vm._$g("17-" + $30, "sc"),
+                  staticStyle: {
+                    position: "absolute",
+                    right: "15rpx",
+                    bottom: "15rpx",
+                    "background-color": "rgba(0,0,0,0.4)"
+                  },
+                  attrs: { _i: "17-" + $30 }
+                },
+                [
+                  _c("v-uni-text", {
+                    staticClass: _vm._$g("18-" + $30, "sc"),
+                    staticStyle: { width: "20rpx", height: "20rpx" },
+                    attrs: { _i: "18-" + $30 }
+                  }),
+                  _c(
+                    "v-uni-text",
+                    {
+                      staticClass: _vm._$g("19-" + $30, "sc"),
+                      attrs: { _i: "19-" + $30 }
+                    },
+                    [_vm._v("已结束")]
+                  )
+                ],
+                1
+              )
             ],
             1
           )
@@ -387,7 +499,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.list-item {\r\n\twidth: 375rpx;\r\n\theight: 375rpx;\r\n\tpadding: 5rpx;\r\n\tbox-sizing: border-box;\r\n\tposition: relative;\n}\r\n", ""]);
+exports.push([module.i, "\n.list-item {\n\twidth: 375rpx;\n\theight: 375rpx;\n\tpadding: 5rpx;\n\tbox-sizing: border-box;\n\tposition: relative;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
