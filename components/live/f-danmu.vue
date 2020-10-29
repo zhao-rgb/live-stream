@@ -15,7 +15,7 @@
 				v-for="(item, index) in list"
 				:key="index"
 			>
-				<text class="font-md text-danger">{{ item.name }}</text>
+				<text class="font-md text-danger">{{ item.name }}:</text>
 				<text class="font-md text-white">{{ item.content }}</text>
 			</view>
 		</scroll-view>
@@ -23,36 +23,42 @@
 </template>
 
 <script>
-export default{
-  data(){
-    return{
-      scrollInToView: '', //滚动到哪个元素的view视图
-      list: [] //弹幕数组
-    }
-  },
-  mounted(){
-    let id = 1
-    setInterval(() =>{
-      this.list.push({
-        id:id,
-        name: '观众'+id,
-        content: '发言_'+id
-      })
-      this.toBottom()
-      id++
-    },2000)
-  },
-  methods:{
-    toBottom(){
-      setTimeout(() =>{
-        let len = this.list.length
-        if(len>0&&this.list[len - 1]){
-          this.scrollInToView = 'danmu' + this.list[len - 1].id
-        }
-      },200)
-    }
-  }
-}
+export default {
+	data() {
+		return {
+			scrollInToView: '', //滚动到哪个元素的view视图
+			list: [] //弹幕数组
+		};
+	},
+	mounted() {
+		// let id = 1
+		// setInterval(() =>{
+		//   this.list.push({
+		//     id:id,
+		//     name: '观众'+id,
+		//     content: '发言_'+id
+		//   })
+		//   this.toBottom()
+		//   id++
+		// },2000)
+	},
+	methods: {
+		// 发送弹幕
+		send(data) {
+			this.list.push(data);
+			// 置于底部
+			this.toBottom();
+		},
+		toBottom() {
+			setTimeout(() => {
+				let len = this.list.length;
+				if (len > 0 && this.list[len - 1]) {
+					this.scrollInToView = 'danmu' + this.list[len - 1].id;
+				}
+			}, 200);
+		},
+	}
+};
 </script>
 
 <style></style>
