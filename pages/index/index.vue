@@ -1,8 +1,8 @@
 <template>
 	<view>
-
+		<image src="../../static/banner/3.jpg" style="width: 750rpx; height: 250rpx;"></image>
 		<!-- 轮播图 -->
-		<swiper
+		<!-- <swiper
 			:indicator-dots="true"
 			:autoplay="true"
 			:interval="3000"
@@ -15,64 +15,90 @@
 			<swiper-item>
 				<image src="../../static/banner/2.jpg" style="width: 750rpx; height: 250rpx;"></image>
 			</swiper-item>
-		</swiper>
+		</swiper> -->
 
 		<!-- 列表 -->
 		<view class="flex flex-wrap">
-			<view class="list-item" v-for="i in 10" :key="i" @click="openLive">
-				<image
-					src="/static/me.jpg"
-					style="width: 365rpx; height: 365rpx;"
-					class="rounded"
-					mode="aspectFill"
-				></image>
-
-				<view
-					class="rounded-circle px-2 flex align-center"
-					style="position: absolute; left: 15rpx; top: 15rpx; background-color: rgba(0,0,0,0.4);"
-				>
-					<text class="iconfont iconbizhongguanli text-warning mr-1">	
-					</text>
-					<text class="text-white font">0</text>
-				</view>
-				
-				<view
-					class="rounded-circle px-2 flex align-center"
-					style="position: absolute; right: 15rpx; top: 15rpx; background-color: rgba(0,0,0,0.4);"
-				>
-					<text class="font-sm text-white">
-						人气：
-					</text>
-					<text class="text-white font-sm">0</text>
-				</view>
-				
-				<view
-					class="rounded-circle flex align-center"
-					style="position: absolute; left: 15rpx; bottom: 15rpx; "
-				>
-					<text class="font text-white">
-						标题：
-					</text>
-				</view>
-				
-				<view
-					class="rounded-circle px-2 flex align-center"
-					style="position: absolute; right: 15rpx; bottom: 15rpx; background-color: rgba(0,0,0,0.4);"
-				>
-					<text style="width: 20rpx; height: 20rpx;" class="rounded-circle bg-danger mr-1">
-					</text>
-					<text class="text-white font-sm">已结束</text>
-				</view>
-				
-			</view>
+			<f-list
+				class="list-item"
+				v-for="(item, index) in list"
+				:key="index"
+				:item="item"
+				:index="index"
+				@click="openLive"
+			></f-list>
 		</view>
+		
 	</view>
 </template>
 
 <script>
+import fList from '@/components/f-list.vue';
 export default {
+	components: {
+		fList
+	},
 	data() {
-		return {};
+		return {
+			list: [
+				{
+					name: '小圆圆',
+					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/campus/短发46.jpg',
+					money: 100,
+					popular: 10,
+					status: 0
+				},
+				{
+					name: '果小果',
+					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/campus/短发47.jpg',
+					money: 30,
+					popular: 8,
+					status: 1
+				},
+				{
+					name: '静静',
+					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/campus/短发19.jpeg',
+					money: 50,
+					popular: 1,
+					status: 0
+				},
+				{
+					name: '肉肉',
+					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/campus/短发18.jpeg',
+					money: 60,
+					popular: 1,
+					status: 0
+				},
+				{
+					name: '呆妹',
+					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/campus/短发39.jpg',
+					money: 70,
+					popular: 1,
+					status: 1
+				},
+				{
+					name: '小天才',
+					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/avatar/20200420202237.png',
+					money: 10,
+					popular: 292,
+					status: 1
+				},
+				{
+					name: '啦啦啦啦',
+					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/avatar/20200420202118.png',
+					money: 90,
+					popular: 192,
+					status: 1
+				},
+				{
+					name: '撒野',
+					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/avatar/20200420202138.png',
+					money: 20,
+					popular: 90,
+					status: 1
+				}
+			]
+		};
 	},
 	onLoad() {},
 	methods: {

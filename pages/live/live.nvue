@@ -1,5 +1,6 @@
 <template>
 	<view style="height: 400rpx;" :style="'margin-top:'+statusBarHeight+'px'">
+		<text>jw2jjw2</text>
 		<video src="http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8" autoplay controls="false" class="flex-1"></video>
 	</view>
 	<view class="bg-light" style="height: 1000rpx; z-index:20;">
