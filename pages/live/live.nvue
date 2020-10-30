@@ -195,6 +195,12 @@ export default {
 		this.gifts = myGifts;
 	},
 	methods: {
+		//跳转充值页面
+		openCoin() {
+			uni.navigateTo({
+				url: '../coin/coin'
+			});
+		},
 		openGift() {
 			this.$refs.giftPopup.open();
 		},
