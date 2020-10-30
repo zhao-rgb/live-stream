@@ -1,5 +1,6 @@
 <template>
   <view class="border-top border-light-secondary p-3">
+	  <!-- 当前金币 -->
     <view class="rounded py-4 flex flex-column align-center justify-center bg-main">
       <text class="text-white font-sm mb-2">当前金币</text>
       <text
@@ -7,13 +8,14 @@
         style="font-size:60rpx;"
       >50</text>
     </view>
-
+	
+	<!-- 下划线 -->
     <view class="border-top border-light-secondary my-3"></view>
-
+	
+	<!-- 充值金币区 -->
     <view>
       <text class="font-sm text-muted">请选择充值金币</text>
     </view>
-
     <view
       class="flex flex-wrap"
       style="margin-left: -20rpx;margin-right: -20rpx;"
@@ -48,7 +50,8 @@
 
       </view>
     </view>
-
+	
+	<!-- 底部去充值区 -->
     <view
       class="position-fixed left-0 bottom-0 right-0 border-top flex px-3 align-center"
       style="height: 100rpx;"
@@ -64,7 +67,8 @@
         <text class="text-white font-md">去充值</text>
       </view>
     </view>
-
+	
+	<!-- 自定义充值 -->
     <uni-popup
       ref="popup"
       type="dialog"
@@ -81,6 +85,7 @@
       >
       </uni-popup-dialog>
     </uni-popup>
+	
   </view>
 </template>
 
