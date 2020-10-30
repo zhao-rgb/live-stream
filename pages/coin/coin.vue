@@ -85,9 +85,80 @@
 </template>
 
 <script>
-
+import uniPopup from "@/components/uni-ui/uni-popup/uni-popup.vue";
+import uniPopupDialog from "@/components/uni-ui/uni-popup/uni-popup-dialog.vue";
+export default {
+  components: {
+    uniPopup,
+    uniPopupDialog,
+  },
+  data() {
+    return {
+      activeIndex: 0,
+      list: [
+        {
+          coin: 10,
+          price: 10,
+        },
+        {
+          coin: 20,
+          price: 20,
+        },
+        {
+          coin: 30,
+          price: 30,
+        },
+        {
+          coin: 50,
+          price: 50,
+        },
+        {
+          coin: 100,
+          price: 100,
+        },
+		{
+		  price: 0
+		},
+      ],
+      price: 0,
+    };
+  },
+  onLoad() {
+    let p = this.list[this.activeIndex].price;
+    if (p > 0) {
+      this.price = p;
+    }
+  },
+  methods: {
+    chooseCoin(index) {
+      this.activeIndex = index;
+      let p = this.list[index].price;
+      if (p > 0) {
+        this.price = p;
+      } else {
+        //自定义价格
+        this.$refs.popup.open();
+      }
+    },
+    // 点击取消按钮触发
+    close(done) {
+      done();
+    },
+    // 点击确认按钮触发
+    confirm(done, value) {
+      console.log(value);
+      if (!value) {
+        return uni.showToast({
+          title: "请输入要充值的金额",
+          icon: "none",
+        });
+      }
+      this.price = value;
+      done();
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
 </style>
-
