@@ -30,7 +30,7 @@
 
 					<view class="p">
 						<view
-							class="rounded-circle flex align-center justify-center bg-danger"
+							class="rounded-circle flex align-center justify-center bg-main"
 							style="width: 70rpx;height: 70rpx;"
 						>
 							<text class="text-white">+</text>
@@ -46,7 +46,7 @@
 					</scroll-view>
 					<view class="p">
 						<view
-							class="rounded-circle flex align-center justify-center bg-danger"
+							class="rounded-circle flex align-center justify-center bg-main"
 							style="width: 70rpx; height: 70rpx;"
 						>
 							<text class="text-white font-sm">1000</text>
