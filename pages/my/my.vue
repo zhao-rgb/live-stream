@@ -25,7 +25,7 @@
 			<view class="flex align-center">
 				<view class="flex align-center justify-center position-relative" style="width: 180rpx;height: 160rpx;">
 					<image
-						src="user.avatar || '/static/me.jpg'"
+						:src="user.avatar || '/static/me.jpg'"
 						class="rounded-circle"
 						style="width: 145rpx; height: 145rpx; position: absolute;top: -60rpx;"
 					></image>
@@ -33,7 +33,7 @@
 
 				<view class="flex flex-column">
 					<text class="font-md">{{ user.username }}</text>
-					<text class="font text-muted">撒野</text>
+					<text class="font text-muted">满怀期待</text>
 				</view>
 				<view class="ml-auto mr-3">
 					<view
@@ -47,7 +47,7 @@
 
 			<view class="f-divider"></view>
 			<f-list-item icon="iconbizhongguanli" title="我的金币" :showRight="false">
-				<text class="text-main font">{{user ? user.coin : 0}}金币 立即充值</text>
+				<text class="text-main font">{{ user ? user.coin : 0 }}金币 立即充值</text>
 			</f-list-item>
 			<f-list-item icon="iconzhengzaizhibo" title="我的直播"><text class="text-muted font">0</text></f-list-item>
 			<f-list-item icon="iconfenxiang" title="我的关注"><text class="text-muted font">0</text></f-list-item>
@@ -59,6 +59,7 @@
 
 <script>
 import fListItem from '@/components/common/f-list-item.vue';
+import { mapState } from 'vuex';
 export default {
 	components: {
 		fListItem
@@ -83,8 +84,10 @@ export default {
 			});
 		},
 		logout() {
-			uni.navigateTo({
-				url: '../login/login'
+			this.$store.dispatch('logout').then(res => {
+				uni.navigateBack({
+					delta: 1
+				});
 			});
 		}
 	},
