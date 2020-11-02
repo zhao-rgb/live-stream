@@ -75,15 +75,15 @@ export default {
 					};
 				} else {
 					this.$store.dispatch('login', res);
-					uni.navigateBack({
-						delta: 1
+					uni.switchTab({
+						url: '../index/index'
 					});
+					// uni.navigateBack({
+					// 	delta: 1
+					// });
 				}
 			});
-			// uni.switchTab({
-			// 	url: '../index/index'
-			// });
-		},
+		}
 	}
 };
 </script>
