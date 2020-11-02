@@ -9,7 +9,7 @@
 
 	<view class="flex-1">
 		<video
-			src="http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8"
+			src="https://lives.utools.club/live/BT0WYFERdy7mXziKEITJ.flv?sign=1604341867-ffad8dc87df8b86816ba2f65905e7df8"
 			autoplay
 			controls="false"
 			class="flex-1"
