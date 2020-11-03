@@ -1,6 +1,14 @@
 <template>
 	<view>
-		<image src="../../static/banner/3.jpg" style="width: 750rpx; height: 250rpx;"></image>
+		<!-- <image src="../../static/banner/3.jpg" style="width: 750rpx; height: 250rpx;"></image> -->
+		<view class="top flex align-center justify-center">
+			<input
+				style="width: 600rpx;height: 70rpx; background-color: rgba(0,0,0,0.2);"
+				type="text"
+				class="rounded-circle mx-1 pl-5"
+				placeholder="搜索直播间"
+			/>
+		</view>
 		<!-- 轮播图 -->
 		<!-- <swiper
 			:indicator-dots="true"
@@ -19,89 +27,72 @@
 
 		<!-- 列表 -->
 		<view class="flex flex-wrap">
-			<f-list
-				class="list-item"
-				v-for="(item, index) in list"
-				:key="index"
-				:item="item"
-				:index="index"
-				@click="openLive"
-			></f-list>
+			<view class="list-item" v-for="(item, index) in list" :key="index">
+				<f-card :item="item" :index="index" @click="openLive"></f-card>
+			</view>
 		</view>
-		
+
+		<view class="f-divider"></view>
+		<view class="flex align-center justify-center py-3">
+			<text class="font-md text-secondary">{{ loadText }}</text>
+		</view>
 	</view>
 </template>
 
 <script>
-import fList from '@/components/f-list.vue';
+import fCard from '@/components/common/f-card.vue';
 export default {
 	components: {
-		fList
+		fCard
 	},
 	data() {
 		return {
-			list: [
-				{
-					name: '小圆圆',
-					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/campus/短发46.jpg',
-					money: 100,
-					popular: 10,
-					status: 0
-				},
-				{
-					name: '果小果',
-					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/campus/短发47.jpg',
-					money: 30,
-					popular: 8,
-					status: 1
-				},
-				{
-					name: '静静',
-					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/campus/短发19.jpeg',
-					money: 50,
-					popular: 1,
-					status: 0
-				},
-				{
-					name: '肉肉',
-					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/campus/短发18.jpeg',
-					money: 60,
-					popular: 1,
-					status: 0
-				},
-				{
-					name: '呆妹',
-					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/campus/短发39.jpg',
-					money: 70,
-					popular: 1,
-					status: 1
-				},
-				{
-					name: '小天才',
-					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/avatar/20200420202237.png',
-					money: 10,
-					popular: 292,
-					status: 1
-				},
-				{
-					name: '啦啦啦啦',
-					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/avatar/20200420202118.png',
-					money: 90,
-					popular: 192,
-					status: 1
-				},
-				{
-					name: '撒野',
-					img: 'https://kkkksslls.oss-cn-beijing.aliyuncs.com/avatar/20200420202138.png',
-					money: 20,
-					popular: 90,
-					status: 1
-				}
-			]
+			list: [],
+			page: 1,
+			loadText: '上拉加载更多'
 		};
 	},
-	onLoad() {},
+	onLoad() {
+		this.getData();
+	},
+	onPullDownRefresh() {
+		this.page = 1;
+		this.getData()
+			.then(res => {
+				uni.showToast({
+					title: '刷新成功',
+					icon: 'none'
+				});
+				uni.stopPullDownRefresh();
+			})
+			.catch(err => {
+				uni.stopPullDownRefresh();
+			});
+	},
+	onReachBottom() {
+		if (this.loadText != '上拉加载更多') {
+			return;
+		}
+		this.loadText = '加载中...';
+		this.page++;
+		this.getData();
+	},
 	methods: {
+		getData() {
+			let page = this.page;
+			return this.$H
+				.get('/live/list/' + page)
+				.then(res => {
+					(this.list = page === 1 ? res : [...this.list, ...res]),
+						(this.loadText = res.length < 10 ? '没有更多了' : '上拉加载更多');
+				})
+				.catch(err => {
+					if (this.page > 1) {
+						this.page--;
+						this.loadText = '上拉加载更多';
+					}
+				});
+		},
 		openLive() {
 			uni.navigateTo({
 				url: '../live/live'
@@ -112,6 +103,13 @@ export default {
 </script>
 
 <style>
+.top {
+	width: 750rpx;
+	height: 260rpx;
+	background-image: url(../../static/banner/3.jpg);
+	background-size: cover;
+	background-image: linear-gradient(to right, #ba7ace 0%, #8745ff 100%);
+}
 .list-item {
 	width: 375rpx;
 	height: 375rpx;
