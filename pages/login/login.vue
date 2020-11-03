@@ -9,7 +9,7 @@
 				<text class="font-weight-bold">+86</text>
 				<input
 					type="text"
-					v-model="form.username"
+					v-model="form.phone"
 					class="px-2 font rounded input text-light w-100"
 					placeholder="手机号"
 					placeholder-style="color: #212121"
@@ -32,7 +32,7 @@
 			<view v-if="register != 'account'" class="flex align-center justify-between">
 				<input
 					type="text"
-					v-model="form.password"
+					v-model="form.code"
 					class="px-2 font rounded input"
 					placeholder="请输入验证码"
 					placeholder-style="color: #212121"
@@ -82,14 +82,14 @@
 			<text class="font-sm" style="color: #0056B3;" @click="change">
 				{{ register === 'account' ? '账号密码登录' : '验证码登录' }}
 			</text>
-			<text class="ml-2 mr-2" style="color: #424242;">|</text>
+			<text class="ml-2 mr-2" style="color: #424242;margin-top: -10rpx;">|</text>
 			<text class="font-sm" style="color: #0056B3;">登录遇到问题</text>
 		</view>
 
 		<view class="flex-center mt-4">
-			<view class="text-light-muted" style="height: 2rpx; width: 85rpx; background-color: #A9A5A0;"></view>
+			<view class="text-light-muted mt-2" style="height: 2rpx; width: 85rpx; background-color: #A9A5A0;"></view>
 			<text class="font-sm text-light-muted ml-1 mr-1">社交账号登录</text>
-			<view class="text-light-muted" style="height: 2rpx; width: 85rpx; background-color: #A9A5A0;"></view>
+			<view class="text-light-muted mt-2" style="height: 2rpx; width: 85rpx; background-color: #A9A5A0;"></view>
 		</view>
 
 		<view class="flex-center mt-4">
@@ -112,7 +112,7 @@
 
 		<view class="mt-4 flex-center">
 			<text class="text-light-muted font-sm">注册及代表您同意</text>
-			<text class="font-sm" style="color: #1890ff;">《XXX社区协议》</text>
+			<text class="font-sm" style="color: #1890ff;">《社区直播协议》</text>
 		</view>
 	</view>
 </template>
@@ -128,11 +128,12 @@ export default {
 			register: 'account',
 			type: 'login',
 			send: false,
-			sec: 10,
+			sec: 60,
 			form: {
 				username: '',
 				password: '',
-				repassword: ''
+				phone: '',
+				code: ''
 			}
 		};
 	},
@@ -141,27 +142,29 @@ export default {
 			this.register = this.register === 'account' ? 'idcode' : 'account';
 		},
 		changeType() {
-			this.type = this.type === 'login' ? 'reg' : 'login';
+			this.type = this.type === 'login' ? 'phoneLogin' : 'login';
 		},
 		//登录
 		submit() {
-			let msg = this.type === 'login' ? '登录' : '注册';
-			this.$H.post('/' + this.type, this.form).then(res => {
+			let type = '';
+			if (this.register === 'account') {
+				type = 'login';
+			} else {
+				type = 'phoneLogin';
+				this.form = {
+					phone: this.form.phone,
+					code: this.form.code
+				}
+			}
+			console.log(type);
+			console.log(this.form)
+			this.$H.post('/' + type, this.form).then(res => {
 				console.log(res);
 				uni.showToast({
-					title: msg + '成功',
+					title: '登录成功',
 					icon: 'none'
 				});
-				if (this.type === 'reg') {
-					this.changeType();
-					this.form = {
-						username: '',
-						password: '',
-						repassword: ''
-					};
-				} else {
-					this.$store.dispatch('login', res);
-				}
+				this.$store.dispatch('login', res);
 				uni.switchTab({
 					url: '../index/index'
 				});
@@ -170,20 +173,22 @@ export default {
 		//发送验证码
 		sendCode() {
 			this.send = true;
-			// 倒计时60s结束后 可再次发送验证码
-			let promise = new Promise((resolve, reject) => {
-				let setTimer = setInterval(() => {
-					this.sec = this.sec - 1;
-					if (this.sec <= 0) {
-						this.send = false;
-						resolve(setTimer);
-					}
-				}, 1000);
+			this.$H.post('/sendcode', { phone: this.form.phone }).then(res => {
+				// 倒计时60s结束后 可再次发送验证码
+				let promise = new Promise((resolve, reject) => {
+					let setTimer = setInterval(() => {
+						this.sec = this.sec - 1;
+						if (this.sec <= 0) {
+							this.send = false;
+							resolve(setTimer);
+						}
+					}, 1000);
+				});
+				promise.then(setTimer => {
+					clearInterval(setTimer);
+				});
+				this.sec = 60;
 			});
-			promise.then(setTimer => {
-				clearInterval(setTimer);
-			});
-			this.sec = 10;
 		}
 	}
 };

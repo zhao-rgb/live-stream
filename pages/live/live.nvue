@@ -9,7 +9,7 @@
 
 	<view class="flex-1">
 		<video
-			src="https://lives.utools.club/live/BT0WYFERdy7mXziKEITJ.flv?sign=1604341867-ffad8dc87df8b86816ba2f65905e7df8"
+			:src="src"
 			autoplay
 			controls="false"
 			class="flex-1"
@@ -22,15 +22,15 @@
 				<view style="width: 325rpx;background-color: rgba(0,0,0,0.4);" class="flex rounded-circle">
 					<view class="p">
 						<image
-							src="../../static/me.jpg"
+							:src="detail.user.avatar || '/static/me.jpg'"
 							style="width: 70rpx; height: 70rpx;"
 							class="rounded-circle"
 						></image>
 					</view>
 
 					<view class="flex-1 flex flex-column justify-center">
-						<text class="text-white font">主播昵称</text>
-						<text class="text-white font-sm">100</text>
+						<text class="text-white font">{{ detail.user.username }}</text>
+						<text class="text-white font-sm">{{ detail.user.look_count }}</text>
 					</view>
 
 					<view class="p">
@@ -64,7 +64,9 @@
 			<view style="height: 80rpx;" class="px-2 my-2">
 				<view style="width: 325rpx;background-color: rgba(0,0,0,0.4);" class="flex rounded-circle align-center">
 					<view class="p"><text class="text-warning">金币区</text></view>
-					<view class="flex-1 flex flex-column justify-center"><text class="text-white font">100</text></view>
+					<view class="flex-1 flex flex-column justify-center">
+						<text class="text-white font">{{ detail.coin }}</text>
+					</view>
 				</view>
 			</view>
 
@@ -168,6 +170,7 @@ import fGift from '@/components/live/f-gift.vue';
 import fDanmu from '@/components/live/f-danmu.vue';
 import uniPopup from '@/components/uni-ui/uni-popup/uni-popup.vue';
 import myGifts from '@/common/gifts.js';
+import $H from '@/common/request.js';
 export default {
 	components: {
 		fGift,
@@ -188,24 +191,53 @@ export default {
 	},
 	data() {
 		return {
+			id: 0,
+			detail: {
+				create_time: '',
+				id: 1,
+				title: '',
+				cover: '',
+				user_id: 0,
+				look_count: 0,
+				coin: 0,
+				key: '',
+				status: 0,
+				userId: 0,
+				user: {
+					id: 0,
+					username: '',
+					avatar: ''
+				}
+			},
+			sign: '',
 			statusBarHeight: 0,
 			content: '',
 			gifts: [],
 			giftActiveId: 0
 		};
 	},
-	onLoad() {
+	onLoad(option) {
+		this.id = option.id;
+		console.log(this.id);
 		let res = uni.getSystemInfoSync();
 		this.statusBarHeight = res.statusBarHeight;
 		this.gifts = myGifts;
+		//请求后端接口，获得该直播间详情数据，包括主播信息，和直播间的签名数据
+		$H.get('/live/read/' + this.id).then(res => {
+			console.log(res);
+			this.detail = res.data;
+			this.sign = res.sign;
+		});
+	},
+	computed: {
+		src() {
+			if (this.detail.key == '' || this.sign == '') {
+				return '';
+			}
+			return `http://lives.utools.club/live/${this.detail.key}.flv?sign=${this.sign}`;
+		}
 	},
 	methods: {
-		//跳转充值页面
-		openCoin() {
-			uni.navigateTo({
-				url: '../coin/coin'
-			});
-		},
 		openGift() {
 			this.$refs.giftPopup.open();
 		},
@@ -225,8 +257,8 @@ export default {
 			}
 			let g = this.gifts[index];
 			this.$refs.gift.send({
-				username: '龙龙鸭',
-				avatar: '',
+				username: this.$store.state.user.username,
+				avatar: this.$store.state.user.avatar,
 				gift_name: g.name,
 				gift_image: g.image,
 				num: 10
@@ -246,7 +278,7 @@ export default {
 			}
 			this.$refs.danmu.send({
 				id: Math.random() * 100, //随机生成一个id
-				name: '撒野',
+				name: this.$store.state.user.username,
 				content: this.content
 			});
 			this.content = '';
@@ -256,6 +288,12 @@ export default {
 		back() {
 			uni.navigateBack({
 				delta: 1
+			});
+		},
+		//跳转充值页面
+		openCoin() {
+			uni.navigateTo({
+				url: '../coin/coin'
 			});
 		}
 	}

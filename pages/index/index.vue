@@ -28,7 +28,7 @@
 		<!-- 列表 -->
 		<view class="flex flex-wrap">
 			<view class="list-item" v-for="(item, index) in list" :key="index">
-				<f-card :item="item" :index="index" @click="openLive"></f-card>
+				<f-card :item="item" :index="index" @click="openLive(item.id)"></f-card>
 			</view>
 		</view>
 
@@ -93,9 +93,10 @@ export default {
 					}
 				});
 		},
-		openLive() {
+		openLive(e) {
+			console.log(e);
 			uni.navigateTo({
-				url: '../live/live'
+				url: '../live/live?id=' + e
 			});
 		}
 	}
