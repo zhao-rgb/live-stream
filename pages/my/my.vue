@@ -5,6 +5,9 @@
 		<view v-if="!user" class="flex align-center">
 			<view class="flex align-center justify-center" style="width: 180rpx;height: 180rpx;">
 				<image src="../../static/1.png" class="rounded-circle" style="width: 105rpx;height: 105rpx;"></image>
+				<view style="position: absolute;top: 90rpx; right: 40rpx;" @click="settings">
+					<image src="../../static/setting.png" style="width: 70rpx;height: 70rpx;"></image>
+				</view>
 			</view>
 			<view class="flex flex-column">
 				<text class="font-md">未登录</text>
@@ -78,6 +81,11 @@ export default {
 		this.$store.dispatch('getUserInfo');
 	},
 	methods: {
+		settings(){
+			this.authJump({
+				url:'../user-set/user-set'
+			})
+		},
 		tian() {
 			uni.navigateTo({
 				url: '../live-push/live-push'
