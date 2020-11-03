@@ -60,7 +60,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/live-push/live-push",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		// "navigationBarTextStyle": "white",
 		// "navigationBarTitleText": "直播",

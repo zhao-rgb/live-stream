@@ -8,7 +8,7 @@
 			</view>
 			<view class="flex flex-column">
 				<text class="font-md">未登录</text>
-				<text class="font text-muted">登录体验更多功能</text>
+				<text class="font text-muted" @click="tian">登录体验更多功能</text>
 			</view>
 			<view class="ml-auto mr-3">
 				<view
@@ -78,6 +78,11 @@ export default {
 		this.$store.dispatch('getUserInfo');
 	},
 	methods: {
+		tian() {
+			uni.navigateTo({
+				url: '../live-push/live-push'
+			});
+		},
 		openLogin() {
 			uni.navigateTo({
 				url: '../login/login'
