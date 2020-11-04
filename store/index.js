@@ -24,6 +24,13 @@ export default new Vuex.Store({
 				transports: ['websocket'],
 				timeout: 5000
 			})
+			//全局事件，用来监听在线人数
+			let onlineEvent = (e) => {
+				uni.$emit('live', {
+					type: "online",
+					data: e
+				})
+			}
 
 			// 监听连接
 			S.on('connect', () => {
@@ -41,7 +48,7 @@ export default new Vuex.Store({
 				} = S
 				S.on(id, (e) => {
 					let d = e.data
-					if (d.action === 'erroe') {
+					if (d.action === 'error') {
 						let msg = d.payload
 						return uni.showToast({
 							title: msg,
@@ -49,6 +56,8 @@ export default new Vuex.Store({
 						});
 					}
 				})
+				//监听在线用户信息
+				S.on('online', onlineEvent)
 			})
 			// 监听失败
 			S.on('error', () => {
