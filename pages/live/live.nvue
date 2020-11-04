@@ -8,12 +8,7 @@
 	</view> -->
 
 	<view class="flex-1">
-		<video
-			:src="src"
-			autoplay
-			controls="false"
-			class="flex-1"
-		></video>
+		<video :src="src" autoplay controls="false" class="flex-1"></video>
 
 		<!-- 头部 -->
 		<view style="position: fixed; left: 0; right: 0;" :style="'top:' + statusBarHeight + 'px'">
@@ -171,6 +166,8 @@ import fDanmu from '@/components/live/f-danmu.vue';
 import uniPopup from '@/components/uni-ui/uni-popup/uni-popup.vue';
 import myGifts from '@/common/gifts.js';
 import $H from '@/common/request.js';
+import $C from '@/common/config.js';
+import { mapState } from 'vuex';
 export default {
 	components: {
 		fGift,
@@ -188,6 +185,8 @@ export default {
 				num: 1
 			});
 		}, 3000);
+		//加入直播间
+		this.joinOrLeaveLive('join');
 	},
 	data() {
 		return {
@@ -234,10 +233,23 @@ export default {
 			if (this.detail.key == '' || this.sign == '') {
 				return '';
 			}
-			return `http://lives.utools.club/live/${this.detail.key}.flv?sign=${this.sign}`;
-		}
+			return `http://livess.utools.club/live/${this.detail.key}.flv?sign=${this.sign}`;
+		},
+		...mapState({
+			socket: state => state.socket,
+			token: state => state.token
+		})
 	},
 	methods: {
+		//加入或离开直播间
+		joinOrLeaveLive(type) {
+			if (this.socket && this.token) {
+				this.socket.emit(type + 'Live', {
+					live_id: this.id,
+					token: this.token
+				});
+			}
+		},
 		openGift() {
 			this.$refs.giftPopup.open();
 		},

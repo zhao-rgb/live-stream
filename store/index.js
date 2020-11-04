@@ -28,12 +28,26 @@ export default new Vuex.Store({
 			// 监听连接
 			S.on('connect', () => {
 				console.log('socket已连接')
-				//测试推送一条消息到后端
-				S.emit('test', '测试socket连接')
-
-				//监听来自服务器端的消息
-				S.on(S.id, (e) => {
-					console.log(e);
+				// //测试推送一条消息到后端
+				// S.emit('test', '测试socket连接')
+				// //监听来自服务器端的消息
+				// S.on(S.id, (e) => {
+				// 	console.log(e);
+				// })
+				state.socket = S
+				// socket.io唯一连接id，可以监控这个id实现点对点通讯
+				const {
+					id
+				} = S
+				S.on(id, (e) => {
+					let d = e.data
+					if (d.action === 'erroe') {
+						let msg = d.payload
+						return uni.showToast({
+							title: msg,
+							icon: 'none'
+						});
+					}
 				})
 			})
 			// 监听失败
