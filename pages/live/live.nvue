@@ -285,6 +285,15 @@ export default {
 					this.content = '';
 					this.$refs.input.close();
 					break;
+				case 'gift':
+					this.$refs.gift.send({
+						username: d.username,
+						avatar: d.avatar,
+						gift_name: d.gift_name,
+						gift_image: d.gift_image,
+						num: d.num
+					});
+					break;
 				default:
 					break;
 			}
@@ -315,7 +324,6 @@ export default {
 			if (index === -1) {
 				return;
 			}
-			// let g = this.gifts[index];
 			// this.$refs.gift.send({
 			// 	username: this.$store.state.user.username,
 			// 	avatar: this.$store.state.user.avatar,
@@ -338,12 +346,15 @@ export default {
 			console.log(g);
 
 			if (this.socket) {
+				console.log('请求到socket');
 				this.socket.emit('gift', {
 					live_id: this.id,
 					gift_id: g.id,
 					token: this.token
 				});
+				console.log('结束');
 			}
+			this.closeGift();
 		},
 		//打开输入弹幕的对话框
 		openInput() {
