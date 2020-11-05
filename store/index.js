@@ -31,6 +31,20 @@ export default new Vuex.Store({
 					data: e
 				})
 			}
+			//全局事件，用来监听发送弹幕
+			let commentEvent = (e) => {
+				uni.$emit('live', {
+					type: "comment",
+					data: e
+				})
+			}
+			//全局事件，用来监听发送礼物
+			let giftEvent = (e) => {
+				uni.$emit('live', {
+					type: "gift",
+					data: e
+				})
+			}
 
 			// 监听连接
 			S.on('connect', () => {
@@ -61,11 +75,17 @@ export default new Vuex.Store({
 				})
 				//监听在线用户信息
 				S.on('online', onlineEvent)
+				//监听弹幕信息
+				S.on('comment', commentEvent)
+				//监听礼物接收
+				S.on('gift', giftEvent)
 			})
 			// 移除监听事件
 			const removeListener = () => {
 				if (S) {
 					S.removeListener('online', onlineEvent)
+					S.removeListener('comment', commentEvent)
+					S.removeListener('gift', giftEvent)
 				}
 			}
 			// 监听失败

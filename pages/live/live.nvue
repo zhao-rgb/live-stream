@@ -234,6 +234,13 @@ export default {
 			this.detail = res.data;
 			this.sign = res.sign;
 		});
+		//请求礼物列表接口
+		$H.get('/gift/list').then(res => {
+			this.gifts = res.map(item => {
+				item.image = $C.imgUrl + item.image;
+				return item;
+			});
+		});
 		//监听全局事件
 		uni.$on('live', this.handleLiveEvent);
 	},
@@ -258,12 +265,25 @@ export default {
 	methods: {
 		//处理直播间事件
 		handleLiveEvent(e) {
+			console.log(e);
 			let d = e.data;
 			switch (e.type) {
 				case 'online':
 					if (d.action === 'join') {
 						this.list = d.data;
 					}
+					if (d.action === 'leave') {
+						this.list = d.data;
+					}
+					break;
+				case 'comment':
+					this.$refs.danmu.send({
+						id: d.id,
+						name: d.user.name,
+						content: d.content
+					});
+					this.content = '';
+					this.$refs.input.close();
 					break;
 				default:
 					break;
@@ -295,15 +315,35 @@ export default {
 			if (index === -1) {
 				return;
 			}
+			// let g = this.gifts[index];
+			// this.$refs.gift.send({
+			// 	username: this.$store.state.user.username,
+			// 	avatar: this.$store.state.user.avatar,
+			// 	gift_name: g.name,
+			// 	gift_image: g.image,
+			// 	num: 10
+			// });
+			// this.closeGift();
 			let g = this.gifts[index];
-			this.$refs.gift.send({
-				username: this.$store.state.user.username,
-				avatar: this.$store.state.user.avatar,
-				gift_name: g.name,
-				gift_image: g.image,
-				num: 10
-			});
-			this.closeGift();
+
+			if (!this.token && !this.socket) {
+				uni.navigateTo({
+					url: '../login/login'
+				});
+				return uni.showToast({
+					title: '请先登录',
+					icon: 'none'
+				});
+			}
+			console.log(g);
+
+			if (this.socket) {
+				this.socket.emit('gift', {
+					live_id: this.id,
+					gift_id: g.id,
+					token: this.token
+				});
+			}
 		},
 		//打开输入弹幕的对话框
 		openInput() {
@@ -314,15 +354,29 @@ export default {
 		//提交发送弹幕信息
 		sumbit() {
 			if (this.content === '') {
-				return;
+				return uni.showToast({
+					title: '评论内容不能为空',
+					icon: 'none'
+				});
 			}
-			this.$refs.danmu.send({
-				id: Math.random() * 100, //随机生成一个id
-				name: this.$store.state.user.username,
-				content: this.content
-			});
-			this.content = '';
-			this.$refs.input.close();
+
+			if (!this.token && !this.socket) {
+				uni.navigateTo({
+					url: '../login/login'
+				});
+				return uni.showToast({
+					title: '请先登录',
+					icon: 'none'
+				});
+			}
+
+			if (this.socket) {
+				this.socket.emit('comment', {
+					live_id: this.id,
+					data: this.content,
+					token: this.token
+				});
+			}
 		},
 		//返回上一层页面
 		back() {
