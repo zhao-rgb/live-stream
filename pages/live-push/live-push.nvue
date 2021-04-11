@@ -10,7 +10,7 @@
 export default {
 	data() {
 		return {
-			url: 'rtmp://101.200.130.236:1935/live/exp',
+			url: 'rtmp://121.196.104.253:1935/live/exp',
 			enableCamera: false,
 			context: null
 		};

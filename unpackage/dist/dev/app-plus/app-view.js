@@ -229,36 +229,48 @@ var render = function() {
     "v-uni-view",
     { attrs: { _i: 0 } },
     [
+      _c("v-uni-view", { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } }),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } },
+        {
+          staticClass: _vm._$g(2, "sc"),
+          staticStyle: {
+            position: "sticky",
+            top: "0rpx",
+            "z-index": "999",
+            padding: "20rpx",
+            "background-image":
+              "linear-gradient(to right, #ba7ace 0%, #8745ff 100%)"
+          },
+          attrs: { _i: 2 }
+        },
         [
           _c("v-uni-input", {
-            staticClass: _vm._$g(2, "sc"),
+            staticClass: _vm._$g(3, "sc"),
             staticStyle: {
               width: "600rpx",
               height: "70rpx",
               "background-color": "rgba(0,0,0,0.2)"
             },
-            attrs: { type: "text", placeholder: "搜索直播间", _i: 2 }
+            attrs: { type: "text", placeholder: "搜索直播间", _i: 3 }
           })
         ],
         1
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(3, "sc"), attrs: { _i: 3 } },
-        _vm._l(_vm._$g(4, "f"), function(item, index, $20, $30) {
+        { staticClass: _vm._$g(4, "sc"), attrs: { _i: 4 } },
+        _vm._l(_vm._$g(5, "f"), function(item, index, $20, $30) {
           return _c(
             "v-uni-view",
             {
               key: item,
-              staticClass: _vm._$g("4-" + $30, "sc"),
-              attrs: { _i: "4-" + $30 }
+              staticClass: _vm._$g("5-" + $30, "sc"),
+              attrs: { _i: "5-" + $30 }
             },
             [
               _c("f-card", {
-                attrs: { _i: "5-" + $30 },
+                attrs: { _i: "6-" + $30 },
                 on: {
                   click: function($event) {
                     return _vm.$handleViewEvent($event)
@@ -271,15 +283,15 @@ var render = function() {
         }),
         1
       ),
-      _c("v-uni-view", { staticClass: _vm._$g(6, "sc"), attrs: { _i: 6 } }),
+      _c("v-uni-view", { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } }),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
+        { staticClass: _vm._$g(8, "sc"), attrs: { _i: 8 } },
         [
           _c(
             "v-uni-text",
-            { staticClass: _vm._$g(8, "sc"), attrs: { _i: 8 } },
-            [_vm._v(_vm._$g(8, "t0-0"))]
+            { staticClass: _vm._$g(9, "sc"), attrs: { _i: 9 } },
+            [_vm._v(_vm._$g(9, "t0-0"))]
           )
         ],
         1
@@ -738,7 +750,7 @@ var ___CSS_LOADER_URL_IMPORT_0___ = __webpack_require__(/*! ../../static/banner/
 exports = ___CSS_LOADER_API_IMPORT___(false);
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-exports.push([module.i, "\n.top {\r\n\twidth: 750rpx;\r\n\theight: 260rpx;\r\n\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\r\n\tbackground-size: cover;\r\n\tbackground-image: -webkit-linear-gradient(left, #ba7ace 0%, #8745ff 100%);\r\n\tbackground-image: linear-gradient(to right, #ba7ace 0%, #8745ff 100%);\n}\n.list-item {\r\n\twidth: 375rpx;\r\n\theight: 375rpx;\r\n\tpadding: 5rpx;\r\n\tbox-sizing: border-box;\r\n\tposition: relative;\n}\r\n", ""]);
+exports.push([module.i, "\n.top {\r\n\twidth: 750rpx;\r\n\theight: 130rpx;\r\n\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\r\n\tbackground-size: cover;\r\n\tbackground-image: -webkit-linear-gradient(left, #ba7ace 0%, #8745ff 100%);\r\n\tbackground-image: linear-gradient(to right, #ba7ace 0%, #8745ff 100%);\r\n\tposition: relative;\r\n\ttop: 0rpx;\r\n\tz-index: 1000;\n}\n.list-item {\r\n\twidth: 375rpx;\r\n\theight: 375rpx;\r\n\tpadding: 5rpx;\r\n\tbox-sizing: border-box;\r\n\tposition: relative;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1473,7 +1485,14 @@ var render = function() {
               }),
               _c(
                 "f-list-item",
-                { attrs: { _i: 24 } },
+                {
+                  attrs: { _i: 24 },
+                  on: {
+                    click: function($event) {
+                      return _vm.$handleViewEvent($event)
+                    }
+                  }
+                },
                 [
                   _c(
                     "v-uni-text",
@@ -1507,7 +1526,14 @@ var render = function() {
                 ],
                 1
               ),
-              _c("f-list-item", { attrs: { _i: 30 } }),
+              _c("f-list-item", {
+                attrs: { _i: 30 },
+                on: {
+                  click: function($event) {
+                    return _vm.$handleViewEvent($event)
+                  }
+                }
+              }),
               _c("f-list-item", {
                 attrs: { _i: 31 },
                 on: {
@@ -1885,7 +1911,7 @@ var render = function() {
               staticStyle: { "font-size": "60rpx" },
               attrs: { _i: 3 }
             },
-            [_vm._v("50")]
+            [_vm._v(_vm._$g(3, "t0-0"))]
           )
         ],
         1

@@ -1,4 +1,5 @@
 {
-  "navigationBarTitleText": "我的",
-  "usingComponents": {}
+  "usingComponents": {
+    "f-list-item": "/components/common/f-list-item"
+  }
 }

@@ -1,0 +1,1 @@
+<view><live-pusher id="livePusher" url="{{url}}" mode="FHD"></live-pusher><button data-event-opts="{{[['tap',[['startLive',['$event']]]]]}}" bindtap="__e">开始推流（开始直播）</button><button data-event-opts="{{[['tap',[['stopLive',['$event']]]]]}}" bindtap="__e">结束推流</button></view>

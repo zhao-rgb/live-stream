@@ -1,5 +1,6 @@
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {
-    "f-list": "/components/f-list"
+    "f-card": "/components/common/f-card"
   }
 }

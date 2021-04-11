@@ -49,12 +49,12 @@
 			</view>
 
 			<view class="f-divider"></view>
-			<f-list-item icon="iconbizhongguanli" title="我的金币" :showRight="false">
+			<f-list-item icon="iconbizhongguanli" title="我的金币" :showRight="false" @click="openCoin">
 				<text class="text-main font">{{ user ? user.coin : 0 }}金币 立即充值</text>
 			</f-list-item>
 			<f-list-item icon="iconzhengzaizhibo" title="我的直播"><text class="text-muted font">0</text></f-list-item>
 			<f-list-item icon="iconfenxiang" title="我的关注"><text class="text-muted font">0</text></f-list-item>
-			<f-list-item icon="iconmore" title="历史记录"></f-list-item>
+			<f-list-item icon="iconmore" title="历史记录" @click="tuiliu()"></f-list-item>
 			<f-list-item icon="icontuichu" title="退出" @click="logout()"></f-list-item>
 		</view>
 	</view>
@@ -81,10 +81,10 @@ export default {
 		this.$store.dispatch('getUserInfo');
 	},
 	methods: {
-		settings(){
+		settings() {
 			this.authJump({
-				url:'../user-set/user-set'
-			})
+				url: '../user-set/user-set'
+			});
 		},
 		tian() {
 			uni.navigateTo({
@@ -101,6 +101,17 @@ export default {
 				uni.navigateBack({
 					delta: 1
 				});
+			});
+		},
+		//跳转充值页面
+		openCoin() {
+			uni.navigateTo({
+				url: '../coin/coin'
+			});
+		},
+		tuiliu() {
+			uni.navigateTo({
+				url: '../live-push/live-push'
 			});
 		}
 	},

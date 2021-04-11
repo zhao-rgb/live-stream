@@ -2,6 +2,17 @@
 	<view>
 		<!-- <image src="../../static/banner/3.jpg" style="width: 750rpx; height: 250rpx;"></image> -->
 		<view class="top flex align-center justify-center">
+			<!-- <input
+				style="width: 600rpx;height: 70rpx; background-color: rgba(0,0,0,0.2);"
+				type="text"
+				class="rounded-circle mx-1 pl-5"
+				placeholder="搜索直播间"
+			/> -->
+		</view>
+		<view
+			style="position:sticky; top:0rpx; z-index: 999; padding: 20rpx; background-image: linear-gradient(to right, #ba7ace 0%, #8745ff 100%);"
+			class="flex align-center justify-center"
+		>
 			<input
 				style="width: 600rpx;height: 70rpx; background-color: rgba(0,0,0,0.2);"
 				type="text"
@@ -9,6 +20,7 @@
 				placeholder="搜索直播间"
 			/>
 		</view>
+
 		<!-- 轮播图 -->
 		<!-- <swiper
 			:indicator-dots="true"
@@ -106,10 +118,13 @@ export default {
 <style>
 .top {
 	width: 750rpx;
-	height: 260rpx;
+	height: 130rpx;
 	background-image: url(../../static/banner/3.jpg);
 	background-size: cover;
 	background-image: linear-gradient(to right, #ba7ace 0%, #8745ff 100%);
+	position: relative;
+	top: 0rpx;
+	z-index: 1000;
 }
 .list-item {
 	width: 375rpx;

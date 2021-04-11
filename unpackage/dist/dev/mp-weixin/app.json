@@ -2,7 +2,12 @@
   "pages": [
     "pages/index/index",
     "pages/my/my",
-    "pages/live/live"
+    "pages/live/live",
+    "pages/coin/coin",
+    "pages/create-live/create-live",
+    "pages/live-room/live-room",
+    "pages/login/login",
+    "pages/live-push/live-push"
   ],
   "subPackages": [],
   "window": {},
@@ -31,5 +36,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

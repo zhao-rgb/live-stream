@@ -237,7 +237,7 @@ export default {
 		//请求礼物列表接口
 		$H.get('/gift/list').then(res => {
 			this.gifts = res.map(item => {
-				item.image = $C.imgUrl + item.image;
+				// item.image = $C.imageUrl + item.image;
 				return item;
 			});
 		});
@@ -251,16 +251,17 @@ export default {
 		uni.$off('live', this.handleLiveEvent);
 	},
 	computed: {
-		src() {
-			if (this.detail.key == '' || this.sign == '') {
-				return '';
-			}
-			return `http://livess.utools.club/live/${this.detail.key}.flv?sign=${this.sign}`;
-		},
 		...mapState({
 			socket: state => state.socket,
 			token: state => state.token
-		})
+		}),
+		src() {
+			// if (this.detail.key == '' || this.sign == '') {
+			// 	return '';
+			// }
+			// return `${$C.livePlayBaseUrl}/live/${this.detail.key}.flv?sign=${this.sign}`;
+			return 'rtmp://121.196.104.253:1935/live/exp';
+		},	
 	},
 	methods: {
 		//处理直播间事件

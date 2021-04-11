@@ -23,6 +23,12 @@
 
 
 
+
+
+
+
+
+
 /*引入公共样式库 */
 /* 文字 */
 .text-main {
@@ -216,6 +222,14 @@
 .flex-4{ -webkit-box-flex: 4; -webkit-flex: 4; flex: 4;
 }
 .flex-5{ -webkit-box-flex: 5; -webkit-flex: 5; flex: 5;
+}
+.flex-center{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
 }
 .flex-shrink{ -webkit-flex-shrink: 0; flex-shrink: 0;
 }
