@@ -141,7 +141,7 @@ export default {
 	},
 	data() {
 		return {
-			url: '', // 直播服务器地址，暂时为空
+			url: 'rtmp://121.196.104.253:1935/live/EAgBZIETviF02SOr0JyG', // 直播服务器地址，暂时为空
 			mode: 'SD', // 标清模式
 			enableCamera: true, // 是否启用摄像头
 			position: 'back', // 默认摄像头
@@ -229,6 +229,15 @@ export default {
 					beauty: this.beauty,
 					whiteness: this.whiteness
 				};
+				
+				
+				this.context.start({
+					success: a => {
+						console.log('livePusher.start:' + JSON.stringify(a));
+					}
+				});
+				
+				
 				uni.navigateTo({
 					url: `../live-room/live-room?options=${JSON.stringify(options)}&data=${encodeURIComponent(
 						JSON.stringify(res)
@@ -246,6 +255,7 @@ export default {
 			// 			whiteness: this.whiteness
 			// 		})
 			// });
+			
 		},
 		handleSliderChange(e) {
 			this[this.popupType] = e.detail.value;

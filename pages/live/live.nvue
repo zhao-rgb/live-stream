@@ -260,7 +260,7 @@ export default {
 			// 	return '';
 			// }
 			// return `${$C.livePlayBaseUrl}/live/${this.detail.key}.flv?sign=${this.sign}`;
-			return 'rtmp://121.196.104.253:1935/live/exp';
+			return 'rtmp://121.196.104.253:1935/live/EAgBZIETviF02SOr0JyG';
 		},	
 	},
 	methods: {
