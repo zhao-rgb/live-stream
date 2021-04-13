@@ -4,7 +4,7 @@
 			id="livePusher"
 			ref="livePusher"
 			class="livePusher"
-			:url="url"
+			:url="src"
 			:mode="mode"
 			:enable-camera="enableCamera"
 			:auto-focus="true"
@@ -141,7 +141,7 @@ export default {
 	},
 	data() {
 		return {
-			url: 'rtmp://121.196.104.253:1935/live/EAgBZIETviF02SOr0JyG', // 直播服务器地址，暂时为空
+			url: '', // 直播服务器地址，暂时为空
 			mode: 'SD', // 标清模式
 			enableCamera: true, // 是否启用摄像头
 			position: 'back', // 默认摄像头
@@ -193,6 +193,9 @@ export default {
 				whiteness: '美白'
 			};
 			return o[this.popupType];
+		},
+		src() {
+			return `rtmp://121.196.104.253:1935/live/${this.key}`;
 		}
 	},
 	methods: {
@@ -230,6 +233,9 @@ export default {
 					whiteness: this.whiteness
 				};
 				
+				console.log(res.data.key);
+				this.key = res.data.key
+				console.log(this.key);
 				
 				this.context.start({
 					success: a => {
@@ -237,24 +243,14 @@ export default {
 					}
 				});
 				
-				
 				uni.navigateTo({
 					url: `../live-room/live-room?options=${JSON.stringify(options)}&data=${encodeURIComponent(
 						JSON.stringify(res)
 					)}`
 				});
+				
 			});
-			// console.log('我的主播间');
-			// uni.navigateTo({
-			// 	url:
-			// 		'../live-room/live-room?options=' +
-			// 		JSON.stringify({
-			// 			mode: this.mode,
-			// 			position: this.position,
-			// 			beauty: this.beauty,
-			// 			whiteness: this.whiteness
-			// 		})
-			// });
+			
 			
 		},
 		handleSliderChange(e) {

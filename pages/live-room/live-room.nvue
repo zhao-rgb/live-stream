@@ -326,7 +326,7 @@ export default {
 			if (this.detail.key == '' || this.sign == '') {
 				return '';
 			}
-			return `${$C.livePushBaseUrl}/live/${this.detail.key}?sign=${this.sign}`;
+			return `rtmp://121.196.104.253:1935/live/${this.detail.key}`;
 		}
 	},
 	onBackPress() {
