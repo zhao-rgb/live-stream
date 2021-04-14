@@ -141,7 +141,7 @@ export default {
 	},
 	data() {
 		return {
-			url: '', // 直播服务器地址，暂时为空
+			// url: '', // 直播服务器地址，暂时为空
 			mode: 'SD', // 标清模式
 			enableCamera: true, // 是否启用摄像头
 			position: 'back', // 默认摄像头
@@ -233,7 +233,6 @@ export default {
 					whiteness: this.whiteness
 				};
 				
-				console.log(res.data.key);
 				this.key = res.data.key
 				console.log(this.key);
 				

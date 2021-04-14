@@ -48,6 +48,8 @@ export default {
 			this.list.push(data);
 			// 置于底部
 			this.toBottom();
+			// 自动消失
+			this.autoHide();
 		},
 		toBottom() {
 			setTimeout(() => {
@@ -56,6 +58,14 @@ export default {
 					this.scrollInToView = 'danmu' + this.list[len - 1].id;
 				}
 			}, 200);
+		},
+		autoHide() {
+			//定时器，5秒内从数组移除掉，思考：移除了哪个？
+			if (this.list.length) {
+				let timer = setTimeout(() => {
+					this.list.splice(0, 1);
+				}, 5000);
+			}
 		},
 	}
 };

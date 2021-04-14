@@ -54,7 +54,7 @@
 			</f-list-item>
 			<f-list-item icon="iconzhengzaizhibo" title="我的直播"><text class="text-muted font">0</text></f-list-item>
 			<f-list-item icon="iconfenxiang" title="我的关注"><text class="text-muted font">0</text></f-list-item>
-			<f-list-item icon="iconmore" title="历史记录" @click="tuiliu()"></f-list-item>
+			<f-list-item icon="iconmore" title="历史记录"></f-list-item>
 			<f-list-item icon="icontuichu" title="退出" @click="logout()"></f-list-item>
 		</view>
 	</view>
@@ -107,11 +107,6 @@ export default {
 		openCoin() {
 			uni.navigateTo({
 				url: '../coin/coin'
-			});
-		},
-		tuiliu() {
-			uni.navigateTo({
-				url: '../live-push/live-push'
 			});
 		}
 	},

@@ -1526,14 +1526,7 @@ var render = function() {
                 ],
                 1
               ),
-              _c("f-list-item", {
-                attrs: { _i: 30 },
-                on: {
-                  click: function($event) {
-                    return _vm.$handleViewEvent($event)
-                  }
-                }
-              }),
+              _c("f-list-item", { attrs: { _i: 30 } }),
               _c("f-list-item", {
                 attrs: { _i: 31 },
                 on: {

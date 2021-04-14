@@ -112,7 +112,7 @@
 						class="flex align-center justify-center py-2"
 						v-for="(item, index) in modeList"
 						:key="index"
-						:class="mode === item.type ? 'text-main' : ''"
+						:class="mode === item.type ? 'bg-main' : ''"
 						@click="chooseMode(item)"
 					>
 						<text class="font-md" :class="mode === item.type ? 'text-white' : ''">{{ item.desc }}</text>
@@ -369,6 +369,9 @@ export default {
 						icon: 'none'
 					});
 				}
+			});
+			uni.switchTab({
+				url: '../index/index'
 			});
 		},
 		//开始推流
