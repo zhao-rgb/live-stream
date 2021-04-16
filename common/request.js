@@ -2,8 +2,8 @@ export default {
 	// 全局配置
 	common: {
 		// #ifndef H5
-		baseUrl: "http://livess.test.utools.club/api",
-		// baseUrl: "http://live.zhaoxl.icu/api",
+		// baseUrl: "http://livess.test.utools.club/api",
+		baseUrl: "http://zhaoxl.icu:7001/api",
 		// #endif
 		// #ifdef H5
 		baseUrl: "/api",

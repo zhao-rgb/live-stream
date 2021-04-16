@@ -368,11 +368,12 @@ export default {
 						title: '成功退出直播间',
 						icon: 'none'
 					});
+					uni.switchTab({
+						url: '../index/index'
+					});
 				}
 			});
-			uni.switchTab({
-				url: '../index/index'
-			});
+			
 		},
 		//开始推流
 		start() {

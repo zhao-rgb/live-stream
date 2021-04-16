@@ -256,7 +256,7 @@ export default {
 			token: state => state.token
 		}),
 		src() {
-			// return 'rtmp://121.196.104.253:1935/live/BPM9LhenZArQAsnp0JG';
+			// return 'rtmp://121.196.104.253:1935/live/BPM9LhenZArQAsnp0JGR';
 			return `rtmp://121.196.104.253:1935/live/${this.detail.key}`;
 
 		},	
