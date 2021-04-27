@@ -8,7 +8,7 @@
 			<view v-if="register != 'account'" class="flex align-center">
 				<text class="font-weight-bold">+86</text>
 				<input
-					type="text"
+					type="number"
 					v-model="form.phone"
 					class="px-2 font rounded input text-light w-100"
 					placeholder="手机号"
@@ -31,7 +31,7 @@
 
 			<view v-if="register != 'account'" class="flex align-center justify-between">
 				<input
-					type="text"
+					type="number"
 					v-model="form.code"
 					class="px-2 font rounded input"
 					placeholder="请输入验证码"
@@ -59,7 +59,7 @@
 
 			<view v-else class="flex align-center justify-between">
 				<input
-					type="text"
+					type="password"
 					v-model="form.password"
 					class="px-2 font rounded input"
 					placeholder="请输入密码"

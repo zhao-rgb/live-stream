@@ -2956,7 +2956,7 @@ var render = function() {
                     staticClass: _vm._$g(7, "sc"),
                     staticStyle: { height: "100rpx" },
                     attrs: {
-                      type: "text",
+                      type: "number",
                       placeholder: "手机号",
                       "placeholder-style": "color: #212121",
                       _i: 7
@@ -3006,7 +3006,7 @@ var render = function() {
                     staticClass: _vm._$g(12, "sc"),
                     staticStyle: { height: "100rpx" },
                     attrs: {
-                      type: "text",
+                      type: "number",
                       placeholder: "请输入验证码",
                       "placeholder-style": "color: #212121",
                       _i: 12
@@ -3070,7 +3070,7 @@ var render = function() {
                     staticClass: _vm._$g(16, "sc"),
                     staticStyle: { height: "100rpx" },
                     attrs: {
-                      type: "text",
+                      type: "password",
                       placeholder: "请输入密码",
                       "placeholder-style": "color: #212121",
                       _i: 16

@@ -236,6 +236,7 @@ export default {
 		});
 		//请求礼物列表接口
 		$H.get('/gift/list').then(res => {
+			console.log(res);
 			this.gifts = res.map(item => {
 				// item.image = $C.imageUrl + item.image;
 				return item;
