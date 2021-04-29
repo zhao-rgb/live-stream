@@ -154,10 +154,10 @@ export default {
 				this.form = {
 					phone: this.form.phone,
 					code: this.form.code
-				}
+				};
 			}
 			console.log(type);
-			console.log(this.form)
+			console.log(this.form);
 			this.$H.post('/' + type, this.form).then(res => {
 				console.log(res);
 				uni.showToast({
@@ -172,23 +172,30 @@ export default {
 		},
 		//发送验证码
 		sendCode() {
-			this.send = true;
-			this.$H.post('/sendcode', { phone: this.form.phone }).then(res => {
-				// 倒计时60s结束后 可再次发送验证码
-				let promise = new Promise((resolve, reject) => {
-					let setTimer = setInterval(() => {
-						this.sec = this.sec - 1;
-						if (this.sec <= 0) {
-							this.send = false;
-							resolve(setTimer);
-						}
-					}, 1000);
+			if (this.form.phone == '') {
+				return uni.showToast({
+					title: '请先输入手机号',
+					icon: 'none'
 				});
-				promise.then(setTimer => {
-					clearInterval(setTimer);
+			} else {
+				this.send = true;
+				this.$H.post('/sendcode', { phone: this.form.phone }).then(res => {
+					// 倒计时60s结束后 可再次发送验证码
+					let promise = new Promise((resolve, reject) => {
+						let setTimer = setInterval(() => {
+							this.sec = this.sec - 1;
+							if (this.sec <= 0) {
+								this.send = false;
+								resolve(setTimer);
+							}
+						}, 1000);
+					});
+					promise.then(setTimer => {
+						clearInterval(setTimer);
+					});
+					this.sec = 60;
 				});
-				this.sec = 60;
-			});
+			}
 		}
 	}
 };
