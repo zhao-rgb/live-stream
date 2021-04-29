@@ -2051,7 +2051,15 @@ var render = function() {
             [
               _c(
                 "v-uni-text",
-                { staticClass: _vm._$g(21, "sc"), attrs: { _i: 21 } },
+                {
+                  staticClass: _vm._$g(21, "sc"),
+                  attrs: { _i: 21 },
+                  on: {
+                    click: function($event) {
+                      return _vm.$handleViewEvent($event)
+                    }
+                  }
+                },
                 [_vm._v("去充值")]
               )
             ],
@@ -2664,7 +2672,7 @@ var render = function() {
             : _c("v-uni-input", {
                 staticClass: _vm._$g(5, "sc"),
                 attrs: {
-                  type: "text",
+                  type: "number",
                   placeholder: _vm._$g(5, "a-placeholder"),
                   focus: _vm._$g(5, "a-focus"),
                   _i: 5

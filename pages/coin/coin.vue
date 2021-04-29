@@ -45,7 +45,7 @@
 				<text class="font-md font-weight-bold">{{ price }}</text>
 			</view>
 			<view class="bg-main rounded flex align-center justify-center ml-auto" style="width: 150rpx;height: 70rpx;">
-				<text class="text-white font-md">去充值</text>
+				<text class="text-white font-md" @click="chongzhi">去充值</text>
 			</view>
 		</view>
 
@@ -56,7 +56,6 @@
 				message="自定义充值"
 				:duration="2000"
 				placeholder="充值金额"
-				inputType="number"
 				:before-close="true"
 				@close="close"
 				@confirm="confirm"
@@ -142,6 +141,12 @@ export default {
 			}
 			this.price = value;
 			done();
+		},
+		chongzhi(){
+			return uni.showToast({
+				title: '充值成功',
+				icon: 'none'
+			});
 		}
 	}
 };

@@ -142,6 +142,7 @@
 								:key="index"
 								:class="giftActiveId === item.id ? 'border border-main' : ''"
 								@click="giftActiveId = item.id"
+								@longpress="number"
 							>
 								<image :src="item.image" style="width:100rpx;height: 100rpx;" class="rounded"></image>
 								<view class="flex mt-1">
@@ -162,6 +163,20 @@
 				</view>
 			</view>
 		</uni-popup>
+		
+		
+		<!-- 自定义充值 -->
+		<uni-popup ref="popup" type="dialog">
+			<uni-popup-dialog
+				mode="input"
+				message="自定义数量"
+				:duration="2000"
+				placeholder="送礼物数量"
+				:before-close="true"
+				@close="close"
+				@confirm="confirm"
+			></uni-popup-dialog>
+		</uni-popup>
 	</view>
 </template>
 
@@ -169,6 +184,7 @@
 import fGift from '@/components/live/f-gift.vue';
 import fDanmu from '@/components/live/f-danmu.vue';
 import uniPopup from '@/components/uni-ui/uni-popup/uni-popup.vue';
+import uniPopupDialog from '@/components/uni-ui/uni-popup/uni-popup-dialog.vue';
 import myGifts from '@/common/gifts.js';
 import $H from '@/common/request.js';
 import $C from '@/common/config.js';
@@ -177,7 +193,8 @@ export default {
 	components: {
 		fGift,
 		fDanmu,
-		uniPopup
+		uniPopup,
+		uniPopupDialog
 	},
 	mounted() {
 		// // 送礼物演示
@@ -219,7 +236,8 @@ export default {
 			gifts: [],
 			giftActiveId: 0,
 			//在线用户列表
-			list: []
+			list: [],
+			num: 1
 		};
 	},
 	onLoad(option) {
@@ -320,6 +338,7 @@ export default {
 					icon: 'none'
 				});
 			}
+			
 			let index = this.gifts.findIndex(item => item.id === this.giftActiveId);
 			if (index === -1) {
 				return;
@@ -350,7 +369,8 @@ export default {
 				this.socket.emit('gift', {
 					live_id: this.id,
 					gift_id: g.id,
-					token: this.token
+					token: this.token,
+					num_ber: this.num
 				});
 				console.log('结束');
 			}
@@ -400,6 +420,26 @@ export default {
 			uni.navigateTo({
 				url: '../coin/coin'
 			});
+		},
+		// 点击取消按钮触发
+		close(done) {
+			done();
+		},
+		// 点击确认按钮触发
+		confirm(done, value) {
+			console.log(value);
+			if (!value) {
+				return uni.showToast({
+					title: '请输入要送出礼物的数量',
+					icon: 'none'
+				});
+			}
+			this.num = value;
+			done();
+		},
+		number(){
+			//自定义价格
+			this.$refs.popup.open();
 		}
 	}
 };
