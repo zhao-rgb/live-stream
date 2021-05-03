@@ -26,9 +26,13 @@
 
 		<view v-else>
 			<view class="flex align-center">
-				<view class="flex align-center justify-center position-relative" style="width: 180rpx;height: 160rpx;">
+				<view
+					class="flex align-center justify-center position-relative"
+					style="width: 180rpx;height: 160rpx;"
+					@click="chooseCover"
+				>
 					<image
-						:src="user.avatar || '/static/me.jpg'"
+						:src="form.url || user.avatar || '/static/me.jpg'"
 						class="rounded-circle"
 						style="width: 145rpx; height: 145rpx; position: absolute;top: -60rpx;"
 					></image>
@@ -38,7 +42,7 @@
 					<text class="font-md">{{ user.username }}</text>
 					<text class="font text-muted">满怀期待</text>
 				</view>
-				<view class="ml-auto mr-3">
+				<view class="ml-auto mr-3" @click="edit">
 					<view
 						class="border border-main rounded flex align-center justify-center p-2"
 						hover-class="bg-light"
@@ -52,9 +56,13 @@
 			<f-list-item icon="iconbizhongguanli" title="我的金币" :showRight="false" @click="openCoin">
 				<text class="text-main font">{{ user ? user.coin : 0 }}金币 立即充值</text>
 			</f-list-item>
-			<f-list-item icon="iconzhengzaizhibo" title="我的直播"><text class="text-muted font">0</text></f-list-item>
-			<f-list-item icon="iconfenxiang" title="我的关注"><text class="text-muted font">0</text></f-list-item>
-			<f-list-item icon="iconmore" title="历史记录"></f-list-item>
+			<f-list-item icon="iconzhengzaizhibo" title="我的直播" @click="mylive">
+				<text class="text-muted font">0</text>
+			</f-list-item>
+			<f-list-item icon="iconfenxiang" title="我的关注" @click="myfollow">
+				<text class="text-muted font">0</text>
+			</f-list-item>
+			<f-list-item icon="iconmore" title="历史记录" @click="myhistory"></f-list-item>
 			<f-list-item icon="icontuichu" title="退出" @click="logout()"></f-list-item>
 		</view>
 	</view>
@@ -62,6 +70,8 @@
 
 <script>
 import fListItem from '@/components/common/f-list-item.vue';
+import $H from '@/common/request.js';
+import $C from '@/common/config.js';
 import { mapState } from 'vuex';
 export default {
 	components: {
@@ -69,18 +79,52 @@ export default {
 	},
 	data() {
 		return {
-			statusBarHeight: 0
+			statusBarHeight: 0,
+			form: {
+				id: '',
+				url: ''
+			},
+
 		};
 	},
 	computed: {
 		...mapState({
-			user: state => state.user
+			user: state => state.user,
 		})
 	},
 	onShow() {
 		this.$store.dispatch('getUserInfo');
 	},
 	methods: {
+		chooseCover() {
+			uni.chooseImage({
+				count: 1,
+				success: res => {
+					$H.upload(
+						'/upload',
+						{
+							filePath: res.tempFilePaths[0]
+						},
+						p => {
+							console.log(p);
+						}
+					).then(res => {
+						this.form.url = $C.imgUrl + res.url;
+						this.form.id = this.user.id;
+						console.log(this.form);
+						this.$H.post('/reviseAvatar', this.form).then(res => {
+							console.log(res);
+							uni.showToast({
+								title: '更换头像成功',
+								icon: 'none'
+							});
+						});
+					});
+				}
+			});
+			
+			
+		},
 		settings() {
 			this.authJump({
 				url: '../user-set/user-set'
@@ -107,6 +151,30 @@ export default {
 		openCoin() {
 			uni.navigateTo({
 				url: '../coin/coin'
+			});
+		},
+		mylive() {
+			return uni.showToast({
+				title: '暂无我的直播',
+				icon: 'none'
+			});
+		},
+		myfollow() {
+			return uni.showToast({
+				title: '暂无我的关注',
+				icon: 'none'
+			});	
+		},
+		myhistory() {
+			return uni.showToast({
+				title: '暂无历史记录',
+				icon: 'none'
+			});
+		},
+		edit() {
+			return uni.showToast({
+				title: '暂无开通',
+				icon: 'none'
 			});
 		}
 	},

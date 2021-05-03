@@ -106,7 +106,11 @@ export default {
 					price: 0
 				}
 			],
-			price: 0
+			price: 0,
+			form: {
+				id: '',
+				coin: ''
+			},
 		};
 	},
 	onLoad() {
@@ -143,9 +147,18 @@ export default {
 			done();
 		},
 		chongzhi(){
-			return uni.showToast({
-				title: '充值成功',
-				icon: 'none'
+			this.form.id = this.user.id;
+			this.form.coin = parseInt(this.price);
+			console.log(this.form);
+			this.$H.post('/coin', this.form).then(res => {
+				console.log(res);
+				uni.showToast({
+					title: '充值成功',
+					icon: 'none'
+				});
+				uni.switchTab({
+					url: '../my/my'
+				});
 			});
 		}
 	}

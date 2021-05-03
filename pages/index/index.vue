@@ -18,6 +18,7 @@
 				type="text"
 				class="rounded-circle mx-1 pl-5"
 				placeholder="搜索直播间"
+				@input="getSearch"
 			/>
 		</view>
 
@@ -61,7 +62,8 @@ export default {
 		return {
 			list: [],
 			page: 1,
-			loadText: '上拉加载更多'
+			loadText: '上拉加载更多',
+			search: ''
 		};
 	},
 	onLoad() {
@@ -110,6 +112,20 @@ export default {
 			uni.navigateTo({
 				url: '../live/live?id=' + e
 			});
+		},
+		getSearch(e) {
+			let search = e.detail.value;
+			console.log(search);
+			// var newlist = this.list.filter(item => item.title.match(this.search));
+			var newlist = this.list.filter(item => item.title.indexOf(search) > -1);
+			this.list = newlist;
+			console.log(this.list)
+			if(this.list == ''){
+				return uni.showToast({
+					title: '暂无此直播间',
+					icon: 'none'
+				});
+			}
 		}
 	}
 };

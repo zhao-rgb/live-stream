@@ -166,7 +166,7 @@ export default {
 				});
 				this.$store.dispatch('login', res);
 				uni.switchTab({
-					url: '../index/index'
+					url: '../my/my'
 				});
 			});
 		},
@@ -175,6 +175,11 @@ export default {
 			if (this.form.phone == '') {
 				return uni.showToast({
 					title: '请先输入手机号',
+					icon: 'none'
+				});
+			} else if (this.form.phone.length != 11) {
+				return uni.showToast({
+					title: '请先输入正确的手机号',
 					icon: 'none'
 				});
 			} else {

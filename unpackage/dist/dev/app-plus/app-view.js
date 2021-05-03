@@ -252,7 +252,12 @@ var render = function() {
               height: "70rpx",
               "background-color": "rgba(0,0,0,0.2)"
             },
-            attrs: { type: "text", placeholder: "搜索直播间", _i: 3 }
+            attrs: { type: "text", placeholder: "搜索直播间", _i: 3 },
+            on: {
+              input: function($event) {
+                return _vm.$handleViewEvent($event)
+              }
+            }
           })
         ],
         1
@@ -1418,7 +1423,12 @@ var render = function() {
                     {
                       staticClass: _vm._$g(15, "sc"),
                       staticStyle: { width: "180rpx", height: "160rpx" },
-                      attrs: { _i: 15 }
+                      attrs: { _i: 15 },
+                      on: {
+                        click: function($event) {
+                          return _vm.$handleViewEvent($event)
+                        }
+                      }
                     },
                     [
                       _c("v-uni-image", {
@@ -1453,7 +1463,15 @@ var render = function() {
                   ),
                   _c(
                     "v-uni-view",
-                    { staticClass: _vm._$g(20, "sc"), attrs: { _i: 20 } },
+                    {
+                      staticClass: _vm._$g(20, "sc"),
+                      attrs: { _i: 20 },
+                      on: {
+                        click: function($event) {
+                          return _vm.$handleViewEvent($event)
+                        }
+                      }
+                    },
                     [
                       _c(
                         "v-uni-view",
@@ -1504,7 +1522,14 @@ var render = function() {
               ),
               _c(
                 "f-list-item",
-                { attrs: { _i: 26 } },
+                {
+                  attrs: { _i: 26 },
+                  on: {
+                    click: function($event) {
+                      return _vm.$handleViewEvent($event)
+                    }
+                  }
+                },
                 [
                   _c(
                     "v-uni-text",
@@ -1516,7 +1541,14 @@ var render = function() {
               ),
               _c(
                 "f-list-item",
-                { attrs: { _i: 28 } },
+                {
+                  attrs: { _i: 28 },
+                  on: {
+                    click: function($event) {
+                      return _vm.$handleViewEvent($event)
+                    }
+                  }
+                },
                 [
                   _c(
                     "v-uni-text",
@@ -1526,7 +1558,14 @@ var render = function() {
                 ],
                 1
               ),
-              _c("f-list-item", { attrs: { _i: 30 } }),
+              _c("f-list-item", {
+                attrs: { _i: 30 },
+                on: {
+                  click: function($event) {
+                    return _vm.$handleViewEvent($event)
+                  }
+                }
+              }),
               _c("f-list-item", {
                 attrs: { _i: 31 },
                 on: {
