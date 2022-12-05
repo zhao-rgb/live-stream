@@ -195,7 +195,7 @@ export default {
 			return o[this.popupType];
 		},
 		src() {
-			return `rtmp://121.196.104.253:1935/live/${this.key}`;
+			return `rtmp://121.5.129.115:1935/live/${this.key}`;
 		}
 	},
 	methods: {

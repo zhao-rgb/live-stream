@@ -4,14 +4,14 @@ export default {
 	// imgUrl: "http://livess.test.utools.club",
 	
 	
-	baseUrl: "http://zhaoxl.icu:7001",
-	socketUrl: "http://zhaoxl.icu:7001",
-	imgUrl: "http://zhaoxl.icu:7001",
+	baseUrl: "http://121.5.129.115:7001",
+	socketUrl: "http://121.5.129.115:7001",
+	imgUrl: "http://121.5.129.115:7001",
 	
 	imageUrl: "https://kkkksslls.oss-cn-beijing.aliyuncs.com/gift/",
 	
 	// 拉流前缀
-	livePlayBaseUrl: "http://47.242.155.95:23481",
+	livePlayBaseUrl: "http://121.5.129.115:23481",
 	// 推流前缀
-	livePushBaseUrl: "http://47.242.155.95:23480",
+	livePushBaseUrl: "http://121.5.129.115:23480",
 }

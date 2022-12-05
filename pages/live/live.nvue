@@ -41,7 +41,7 @@
 				<view style="width: 325rpx;background-color: rgba(0,0,0,0.4);" class="flex rounded-circle">
 					<!-- 实时在线观看用户情况 -->
 					<scroll-view scroll-x="true" class="flex-1 flex">
-						<view class="p" v-for="(item, index) in list" :key="index">
+						<view class="p" v-for="(item, index) in list" :key="index" @click="personalCard">
 							<image
 								:src="item.avatar || '/static/me.jpg'"
 								style="width: 70rpx; height: 70rpx;"
@@ -110,11 +110,11 @@
 				<view class="btn px-3"><text class="text-white font">说点什么...</text></view>
 			</view>
 			<view class="flex align-center">
-				<view class="btn btn-icon">
+				<view class="btn btn-icon" @click="qian">
 					<text class="iconfont text-white" style="font-size: 40px;">&#xe633;</text>
 				</view>
 				<view class="btn btn-icon bg-main" @click="openGift"><text class="iconfont">&#xe67c;</text></view>
-				<view class="btn btn-icon"><text class="iconfont text-white">&#xe7cd;</text></view>
+				<view class="btn btn-icon" @click="link"><text class="iconfont text-white">&#xe7cd;</text></view>
 				<view class="btn btn-icon" @click="back"><text class="iconfont text-white">&#xe607;</text></view>
 			</view>
 		</view>
@@ -163,8 +163,7 @@
 				</view>
 			</view>
 		</uni-popup>
-		
-		
+
 		<!-- 自定义充值 -->
 		<uni-popup ref="popup" type="dialog">
 			<uni-popup-dialog
@@ -176,6 +175,37 @@
 				@close="close"
 				@confirm="confirm"
 			></uni-popup-dialog>
+		</uni-popup>
+
+		<!-- 个人资料卡 -->
+		<uni-popup type="bottom" ref="card">
+			<view class="bg-white flex align-center flex-column" style="height: 400rpx;">
+				<view class="flex align-center justify-center flex-row ">
+					<image
+						:src="'/static/me.jpg'"
+						class="rounded-circle"
+						style="width: 145rpx; height: 145rpx; "
+					></image>
+						<!-- <text class="iconfont" style="margin-right: 200rpx;">&#xe607;</text> -->
+				</view>
+
+				<view class="flex flex-column align-center justify-center">
+					<text class="font-md mt-2">saye</text>
+					<text class="font text-muted mt-2">这个人很濑,什么也没写</text>
+				</view>
+
+				<view style="height:200rpx;" class="flex align-center justify-between">
+					<view class="flex align-center justify-center py-2 px-2 mr-3 rounded bg-warning">
+						<text class="font">+关注</text>
+					</view>
+					<view class="flex align-center justify-center py-2 px-2 mr-3 rounded bg-main">
+						<text class="font text-white">@TA</text>
+					</view>
+					<view class="flex align-center justify-center py-2 px-2 mr-3 rounded bg-main">
+						<text class="font text-white">主页</text>
+					</view>
+				</view>
+			</view>
 		</uni-popup>
 	</view>
 </template>
@@ -276,7 +306,7 @@ export default {
 		}),
 		src() {
 			// return 'rtmp://121.196.104.253:1935/live/BPM9LhenZArQAsnp0JGR';
-			return `rtmp://121.196.104.253:1935/live/${this.detail.key}`;
+			return `rtmp://121.5.129.115:1935/live/${this.detail.key}`;
 		}
 	},
 	methods: {
@@ -338,7 +368,7 @@ export default {
 					icon: 'none'
 				});
 			}
-			
+
 			let index = this.gifts.findIndex(item => item.id === this.giftActiveId);
 			if (index === -1) {
 				return;
@@ -437,9 +467,24 @@ export default {
 			this.num = value;
 			done();
 		},
-		number(){
+		number() {
 			//自定义价格
 			this.$refs.popup.open();
+		},
+		qian() {
+			uni.showToast({
+				title: '暂无开通',
+				icon: 'none'
+			});
+		},
+		link() {
+			uni.showToast({
+				title: '暂无此链接',
+				icon: 'none'
+			});
+		},
+		personalCard() {
+			this.$refs.card.open();
 		}
 	}
 };

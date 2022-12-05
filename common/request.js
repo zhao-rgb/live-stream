@@ -3,7 +3,7 @@ export default {
 	common: {
 		// #ifndef H5
 		// baseUrl: "http://livess.test.utools.club/api",
-		baseUrl: "http://zhaoxl.icu:7001/api",
+		baseUrl: "http://121.5.129.115:7001/api",
 		// #endif
 		// #ifdef H5
 		baseUrl: "/api",
